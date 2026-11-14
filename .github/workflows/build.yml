@@ -21,7 +21,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract project
-        run: unzip -o PBBlaze_Mobilador_Android_Cloud_Build.zip
+        run: unzip -o PBBlaze_Mobilador_Android_Cloud_Build_FIXED.zip
 
       - name: Build APK
         working-directory: PBBlaze_Mobilador_Test_Project
