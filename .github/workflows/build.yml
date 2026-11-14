@@ -1,0 +1,33 @@
+name: Build PB Blaze APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Extract project
+        run: unzip -o PBBlaze_Mobilador_Android_Cloud_Build.zip
+
+      - name: Build APK
+        working-directory: PBBlaze_Mobilador_Test_Project
+        run: gradle :app:assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PBBlaze-Test-APK
+          path: PBBlaze_Mobilador_Test_Project/app/build/outputs/apk/debug/app-debug.apk
